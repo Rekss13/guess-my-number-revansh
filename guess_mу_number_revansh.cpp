@@ -1,50 +1,54 @@
 ﻿#include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <clocale>
 using namespace std;
 
 int main(){
-    cout << "\tWelcom to Guess My Number:Revansh\n\n";
+    setlocale(LC_CTYPE,"rus");
+    cout << "\tДобро пожаловать в Угадай Число: Реванш\n\n";
     int secretNumber;
     int min = 1;
     int max = 100;
-    cout << "Enter the number that the computer will guess (from " << min << " to " << max << "): ";
+    cout << "Введите число, которое угадывает компьютер (от " << min << " до " << max << "): ";
     cin >> secretNumber;
 
     while (secretNumber < 1 || secretNumber > 100) {
-        cout << "\n\n! The entered number does not match the requested range.\n\n";
-        cout << "Try again: ";
+        cout << "\n\n! Введенный номер не соответствует запрошенному диапазону.\n\n";
+        cout << "Попробуй еще раз: ";
         cin >> secretNumber;
     }
 
-    cout << endl;
+    cout << "\n--------------------------------------------------\n\n";
 
     int guess;
     int tries = 0;
     srand(static_cast<unsigned int>(time(0)));
     do {
         if (min == max) {
-            cout << "The computer entered the number: " << guess << endl;
+            cout << "Компьютер ввел номер: " << guess << endl;
             guess = min;
         }
         else {
-            cout << "Generating a number (from " << min << " to " << max <<")\n\n";
+            cout << "Генерация числа (от " << min << " до " << max <<")\n\n";
             guess = rand() % max + min;
             if (guess > max) guess = max;
-            cout << "The computer entered the number: " << guess << endl;
+            cout << "Компьютер ввел номер: " << guess << endl;
             if (guess > secretNumber) {
-                cout << "\nToo high.\n\n";
+                cout << "\nСлишком много!\n\n";
                 if (guess <= max) max = guess - 1;
             }
             else if (guess < secretNumber) {
-                cout << "\nToo low.\n\n";
+                cout << "\nСлишком мало!\n\n";
                 if (guess >= min) min = guess + 1;
             }
         }
         ++tries;
     } while (guess != secretNumber);
 
-    cout << "\nThe computer picked up the number in " << tries << " attempts.";
+    cout << "\n--------------------------------------------------\n";
+    cout << "\nКомпьютер подобрал номер за " << tries << " попыток.\n\n";
+    cout << "\tИГРА ОКОНЧЕНА\n";
 
     return 0;
 }
