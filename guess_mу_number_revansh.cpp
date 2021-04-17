@@ -1,4 +1,6 @@
 ﻿#include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 int main(){
@@ -42,7 +44,7 @@ int main(){
         ++tries;
     } while (guess != secretNumber);
 
-    cout << "\nThe computer picked up the number in " << tries << " attempts";
+    cout << "\nThe computer picked up the number in " << tries << " attempts.";
 
     return 0;
 }
